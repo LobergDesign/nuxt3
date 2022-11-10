@@ -692,9 +692,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nuxtjs/tailwindcss@npm:^6.1.2":
-  version: 6.1.2
-  resolution: "@nuxtjs/tailwindcss@npm:6.1.2"
+"@nuxtjs/tailwindcss@npm:^6.1.3":
+  version: 6.1.3
+  resolution: "@nuxtjs/tailwindcss@npm:6.1.3"
   dependencies:
     "@nuxt/kit": ^3.0.0-rc.12
     "@nuxt/postcss8": ^1.1.3
@@ -710,7 +710,7 @@ __metadata:
     tailwind-config-viewer: ^1.7.2
     tailwindcss: ^3.2.0
     ufo: ^0.8.6
-  checksum: 7ca2b4fe91e5b69b3852510736afa1331eb2ca63dd779a5b3d8509c4693495acba82fa0f079a0a35ac5eb43bd247d78f10f1aa6b381abe2848bfb8779aed1f47
+  checksum: 110669c27eb10ffbb20f1f419824ddd384a8943ec56d0b0fb75d31517d3f2e463c577af850336a083b4dae9e557cf08e653c6fc1b8a4993ec8fda370a7194a26
   languageName: node
   linkType: hard
 
@@ -5988,7 +5988,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
-    "@nuxtjs/tailwindcss": ^6.1.2
+    "@nuxtjs/tailwindcss": ^6.1.3
     nuxt: 3.0.0-rc.12
   languageName: unknown
   linkType: soft
