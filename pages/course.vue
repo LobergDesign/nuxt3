@@ -6,11 +6,30 @@
           <h1>course:</h1>
         </div>
       </div>
-      <div class="flex flex-row space-x-8 flex-grow">
+      <div class="flex flex-row space-x-9 flex-grow">
         <aside class="bg-white w-3/12 p-5">
-          <p>Im a aside</p>
+          <ul>
+            <li
+              v-for="(chapter, i) in chapters"
+              :key="i"
+              class="space-y-1 mb-4 flex flex-col"
+            >
+              {{ chapter.title }}
+
+              <ul class="ml-7">
+                <li v-for="(lesson, e) in chapter.lessons" :key="e">
+                  <NuxtLink
+                    :to="lesson.path"
+                    :class="lesson.path === $route.fullPath && 'text-blue-500'"
+                  >
+                    {{ lesson.title }}
+                  </NuxtLink>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </aside>
-        <section class="bg-white w-full p-5">
+        <section class="prose bg-white w-full p-5">
           <NuxtPage />
         </section>
       </div>
@@ -18,8 +37,6 @@
   </main>
 </template>
 
-<script>
-export default {};
+<script setup>
+const { chapters } = useCourse();
 </script>
-
-<style></style>
