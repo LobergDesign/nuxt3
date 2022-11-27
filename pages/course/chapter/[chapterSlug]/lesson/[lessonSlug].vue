@@ -9,10 +9,12 @@
     <video-player v-if="lesson.videoId" :videoId="lesson.videoId" />
     <p>{{ lesson.text }}</p>
     <div class="mt-8">
-      <lesson-completed-button
-        :model-value="isLessonCompleted"
-        @update:model-value="toggleCompleted"
-      />
+      <client-only>
+        <lesson-completed-button
+          :model-value="isLessonCompleted"
+          @update:model-value="toggleCompleted"
+        />
+      </client-only>
     </div>
   </div>
 </template>
@@ -42,9 +44,7 @@ useHead({
 });
 
 // button completed
-const progress = useState("progress", () => {
-  return [];
-});
+const progress = useLocalStorage("progress", []);
 
 // check if lesson is completed
 const isLessonCompleted = computed(() => {
