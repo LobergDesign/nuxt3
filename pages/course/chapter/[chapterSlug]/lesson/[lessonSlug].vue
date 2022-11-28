@@ -12,7 +12,7 @@
       <client-only>
         <lesson-completed-button
           :model-value="isLessonCompleted"
-          @update:model-value="throw createError('Ups der skete en fejl');"
+          @update:model-value="toggleCompleted"
         />
       </client-only>
     </div>
@@ -25,6 +25,7 @@ const route = useRoute();
 
 // validate page (404)
 definePageMeta({
+  // runs a route middleware before page is loaded
   validate({ params }) {
     const course = useCourse();
 
@@ -53,13 +54,6 @@ definePageMeta({
     return true;
   },
 });
-
-if (route.params.lessonSlug === "3-typing-component-events") {
-  console.log(
-    "my error",
-    route.params.paransdbndknsjdfbdkjsf.capitalizeIsNotAMethod()
-  );
-}
 
 const chapter = computed(() => {
   return course.chapters.find(
