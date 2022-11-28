@@ -1,9 +1,9 @@
 <template>
-  <main class="min-h-screen w-full bg-gray-100">
-    <div class="ml-auto mr-auto max-w-screen-lg">
+  <main>
+    <div class="prose ml-auto mr-auto max-w-screen-lg">
       <div class="pt-12 flex items-center flex-col w-full">
         <div class="prose mb-12">
-          <h1>course:</h1>
+          <h1>First nuxt app</h1>
         </div>
       </div>
       <div class="flex flex-row space-x-9 flex-grow">
@@ -30,7 +30,18 @@
           </ul>
         </aside>
         <section class="prose bg-white w-full p-5">
-          <NuxtPage />
+          <NuxtErrorBoundary>
+            <NuxtPage />
+            <template #error="{ error }">
+              <p>
+                Oh no, something is not right here
+                <code>
+                  {{ error }}
+                </code>
+              </p>
+              <button type="button" @click="resetError(error)">reset</button>
+            </template>
+          </NuxtErrorBoundary>
         </section>
       </div>
     </div>
@@ -39,4 +50,13 @@
 
 <script setup>
 const { chapters } = useCourse();
+definePageMeta({
+  layout: "alternative-layout",
+});
+const resetError = async (error) => {
+  throw createError({
+    fatal: true,
+    message: "FATAL!",
+  });
+};
 </script>

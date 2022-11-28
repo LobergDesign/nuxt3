@@ -12,7 +12,7 @@
       <client-only>
         <lesson-completed-button
           :model-value="isLessonCompleted"
-          @update:model-value="toggleCompleted"
+          @update:model-value="throw createError('Ups der skete en fejl');"
         />
       </client-only>
     </div>
@@ -22,6 +22,44 @@
 <script setup>
 const course = useCourse();
 const route = useRoute();
+
+// validate page (404)
+definePageMeta({
+  validate({ params }) {
+    const course = useCourse();
+
+    // validate chapter
+    const chapter = course.chapters.find((chapter) => {
+      chapter.slug === params.chapterSlug;
+    });
+
+    if (!chapter) {
+      return createError({
+        statusCode: 404,
+        message: "Chapter not found",
+      });
+    }
+
+    // validate lesson
+    const lesson = chapter.lessons.find((lesson) => {
+      lesson.slug === params.lessonSlug;
+    });
+    if (!lesson) {
+      return createError({
+        statusCode: 404,
+        message: "Chapter not found",
+      });
+    }
+    return true;
+  },
+});
+
+if (route.params.lessonSlug === "3-typing-component-events") {
+  console.log(
+    "my error",
+    route.params.paransdbndknsjdfbdkjsf.capitalizeIsNotAMethod()
+  );
+}
 
 const chapter = computed(() => {
   return course.chapters.find(
