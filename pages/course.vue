@@ -3,7 +3,7 @@
     <div class="prose ml-auto mr-auto max-w-screen-lg">
       <div class="pt-12 flex items-center flex-col w-full">
         <div class="prose mb-12">
-          <h1>First nuxt app</h1>
+          <h1>{{ title }}</h1>
         </div>
       </div>
       <div class="flex flex-row space-x-9 flex-grow">
@@ -49,7 +49,7 @@
 </template>
 
 <script setup>
-const { chapters } = useCourse();
+const { chapters, title } = useCourse();
 definePageMeta({
   layout: "alternative-layout",
 });
