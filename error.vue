@@ -1,14 +1,30 @@
 <template>
   <NuxtLayout>
-    <h1>Server unhandle error</h1>
-    <p>
-      <code>
-        {{ error }}
-      </code>
-    </p>
-    <p class="mt-5">
-      <a @click="handleError"> Click here to clear error and redirect </a>
-    </p>
+    <div v-if="error.statusCode === '404'">
+      <h1>404</h1>
+      <p>
+        <code>
+          {{ error }}
+        </code>
+      </p>
+      <p>
+        {{ error.message }}
+      </p>
+    </div>
+    <div v-else>
+      <h1>Server unhandle error</h1>
+      <p>
+        <code>
+          {{ error }}
+        </code>
+      </p>
+      <p>
+        {{ error.message }}
+      </p>
+      <p class="mt-5">
+        <a @click="handleError"> Click here to clear error and redirect </a>
+      </p>
+    </div>
   </NuxtLayout>
 </template>
 

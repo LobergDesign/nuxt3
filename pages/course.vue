@@ -1,9 +1,12 @@
 <template>
   <main>
     <div class="prose ml-auto mr-auto max-w-screen-lg">
-      <div class="pt-12 flex items-center flex-col w-full">
+      <div class="pt-12 flex justify-between items-center w-full">
         <div class="prose mb-12">
           <h1>{{ title }}</h1>
+        </div>
+        <div>
+          <UserCard />
         </div>
       </div>
       <div class="flex flex-row space-x-9 flex-grow">
