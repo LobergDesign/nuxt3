@@ -10,13 +10,26 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const { title } = useCourse();
+const { query } = useRoute();
 const superbase = useSupabaseClient();
+const user = useSupabaseUser();
+
+// watch to se if user is logged in or out
+watchEffect(async () => {
+  if (user.value) {
+    await navigateTo(query.redirectTo as string, {
+      replace: true,
+    });
+  }
+});
 
 const login = async () => {
+  const redirectTo = `${window.location.origin}${query.redirectTo}`;
   const { error } = await superbase.auth.signInWithOAuth({
     provider: "github",
+    options: { redirectTo },
   });
   if (error) {
     console.error("login errir", error);
