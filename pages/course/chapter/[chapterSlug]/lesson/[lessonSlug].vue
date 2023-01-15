@@ -23,6 +23,9 @@
 const course = useCourse();
 const route = useRoute();
 
+const { chapterSlug, lessonSlug } = route.params;
+const lesson = await useLesson(chapterSlug, lessonSlug);
+
 // validate page (404)
 definePageMeta({
   middleware: [
@@ -63,12 +66,6 @@ definePageMeta({
 const chapter = computed(() => {
   return course.chapters.find(
     (chapter) => chapter.slug === route.params.chapterSlug
-  );
-});
-
-const lesson = computed(() => {
-  return chapter.value.lessons.find(
-    (lesson) => lesson.slug === route.params.lessonSlug
   );
 });
 

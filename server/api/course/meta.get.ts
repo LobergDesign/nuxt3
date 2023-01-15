@@ -1,5 +1,5 @@
 import course from "~/server/courseData";
-import { IChapter, ICourse } from "~/types/course";
+import { ICourse } from "~/types/course";
 
 course as unknown as ICourse;
 
@@ -14,10 +14,6 @@ interface OutlineChapter extends OutlineBase {
 interface OutlineLessons extends OutlineBase {
   path: string;
 }
-type ICourseMeta = {
-  title: string;
-  chapters: OutlineChapter[];
-};
 
 export default defineEventHandler((event) => {
   const outline: any = course.chapters.reduce((prev: any, next: any) => {
