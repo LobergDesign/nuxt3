@@ -20,7 +20,7 @@
 </template>
 
 <script setup>
-const course = useCourse();
+const course = await useCourse();
 const route = useRoute();
 
 const { chapterSlug, lessonSlug } = route.params;
@@ -30,10 +30,10 @@ const lesson = await useLesson(chapterSlug, lessonSlug);
 definePageMeta({
   middleware: [
     // validate dynamic paths
-    function ({ params }, _from) {
-      const course = useCourse();
+    async function ({ params }, _from) {
+      const course = await useCourse();
       // validate chapter
-      const chapter = course.chapters.find((chapter) => {
+      const chapter = course.value.chapters.find((chapter) => {
         return chapter.slug === params.chapterSlug;
       });
 
@@ -64,14 +64,14 @@ definePageMeta({
 });
 
 const chapter = computed(() => {
-  return course.chapters.find(
+  return course.value.chapters.find(
     (chapter) => chapter.slug === route.params.chapterSlug
   );
 });
 
 // meta data
 const title = computed(() => {
-  return `${lesson.value.title} - ${course.title}`;
+  return `${lesson.value.title} - ${course.value.title}`;
 });
 useHead({
   title,

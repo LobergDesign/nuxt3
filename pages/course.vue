@@ -3,7 +3,7 @@
     <div class="prose ml-auto mr-auto max-w-screen-lg">
       <div class="pt-12 flex justify-between items-center w-full">
         <div class="prose mb-12">
-          <h1>{{ title }}</h1>
+          <h1>{{ course.title }}</h1>
         </div>
         <div>
           <UserCard />
@@ -13,7 +13,7 @@
         <aside class="bg-white w-3/12 p-5">
           <ul>
             <li
-              v-for="(chapter, i) in chapters"
+              v-for="(chapter, i) in course.chapters"
               :key="i"
               class="space-y-1 mb-4 flex flex-col"
             >
@@ -52,14 +52,14 @@
 </template>
 
 <script setup>
-const { chapters, title } = useCourse();
 definePageMeta({
   layout: "alternative-layout",
 });
+const course = await useCourse();
+const firstLesson = await useFirstLesson();
+
 const resetError = async (error) => {
-  throw createError({
-    fatal: true,
-    message: "FATAL!",
-  });
+  await navigateTo(firstLesson.path);
+  error.value;
 };
 </script>
