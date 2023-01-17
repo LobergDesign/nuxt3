@@ -7,7 +7,6 @@ export interface ILesson {
   text: string;
   sourceUrl: string;
 }
-
 export interface ILessonWithPath extends ILesson {
   path: string;
 }
@@ -17,7 +16,6 @@ export type IChapter = {
   number: number;
   lessons: ILesson[] | ILessonWithPath[];
 };
-
 export type ICourse = {
   title: string;
   chapters: IChapter[];
