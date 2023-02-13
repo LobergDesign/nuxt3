@@ -13,10 +13,10 @@ export default async <T>(url: string) => {
     const { data, error } = await useFetch<T>(url);
 
     // LAZY option - Lazy call, remove await
-    // const { data, error, pending } =  useLazyFetch<ILessonWithPath>(url);
+    // const { data, error, pending } =  useLazyFetch<LessonWithPath>(url);
 
     // PICK option - used to pick porpertyes to fetch
-    // const { data, error } = await useFetch<ILessonWithPath>(url, {
+    // const { data, error } = await useFetch<LessonWithPath>(url, {
     //   pick: ["title", "number"]
     // });
 

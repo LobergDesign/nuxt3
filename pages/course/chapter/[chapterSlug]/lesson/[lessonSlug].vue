@@ -11,7 +11,7 @@
     <div class="mt-8">
       <client-only>
         <lesson-completed-button
-          :model-value="isLessonCompleted"
+          :model-value="isCompleted"
           @update:model-value="toggleCompleted"
         />
       </client-only>
@@ -20,11 +20,16 @@
 </template>
 
 <script setup>
+import { courseProgeess } from "~/stores/courseProgress";
 const course = await useCourse();
 const route = useRoute();
 
 const { chapterSlug, lessonSlug } = route.params;
 const lesson = await useLesson(chapterSlug, lessonSlug);
+
+const store = courseProgeess();
+const { initialize, toggleComplete } = store;
+initialize();
 
 // validate page (404)
 definePageMeta({
@@ -63,6 +68,11 @@ definePageMeta({
   ],
 });
 
+// check if the current lesson is compledted
+const isCompleted = computed(() => {
+  return store.progress?.[chapterSlug]?.[lessonSlug] || 0;
+});
+
 const chapter = computed(() => {
   return course.value.chapters.find(
     (chapter) => chapter.slug === route.params.chapterSlug
@@ -76,35 +86,4 @@ const title = computed(() => {
 useHead({
   title,
 });
-
-// button completed
-const progress = useLocalStorage("progress", []);
-
-// check if lesson is completed
-const isLessonCompleted = computed(() => {
-  // if chapter not exist
-  if (!progress.value[chapter.value.number - 1]) {
-    return false;
-  }
-
-  // if lesson not exist
-  if (!progress.value[chapter.value.number - 1][lesson.value.number - 1]) {
-    return false;
-  }
-
-  // return the progress value (we now it exist)
-  return progress.value[chapter.value.number - 1][lesson.value.number - 1];
-});
-
-// handle the completion toggle
-const toggleCompleted = () => {
-  // check if chapter exist, if not, add new empty arr
-  if (!progress.value[chapter.value.number - 1]) {
-    progress.value[chapter.value.number - 1] = [];
-  }
-
-  // then set the value to the arr
-  progress.value[chapter.value.number - 1][lesson.value.number - 1] =
-    !isLessonCompleted.value;
-};
 </script>
