@@ -12,7 +12,7 @@
       <client-only>
         <lesson-completed-button
           :model-value="isCompleted"
-          @update:model-value="toggleCompleted"
+          @update:model-value="toggleComplete"
         />
       </client-only>
     </div>
